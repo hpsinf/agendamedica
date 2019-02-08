@@ -1,0 +1,36 @@
+{
+  "name": "agenda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/server.js",
+  "scripts": {
+    "nodemon": "node bin/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpsinf/agendamedica.git"
+  },
+  "author": "Henrique Pinheiro da Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hpsinf/agendamedica/issues"
+  },
+  "homepage": "https://github.com/hpsinf/agendamedica#readme",
+  "dependencies": {
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "@sendgrid/mail": "^6.3.1",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "jsonwebtoken": "^8.4.0",
+    "md5": "^2.2.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.6",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
