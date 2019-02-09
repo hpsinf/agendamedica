@@ -1,8 +1,27 @@
 
-{
+{   
+    "App":{
+        "name": "Agenda Medica"
+    },
     "Server": {
         "port": "3000",
-        "key_token": "lsldfnfcjr23knf"
+        "name": "Agenda Server"
+    },
+    "ConnectBD": {
+        "MongoDB": {
+            "mLab":{
+                "name": "mLab"
+
+            },
+            "mongoDbAtlas":{
+
+            }
+        }
+
+    },
+    "Keys":{
+        "onlyRead": "lhsandnhdldfmmdf",
+        "readWrite": "njednhfmmsnhdnnm"
     }
 }
 
