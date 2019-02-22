@@ -17,17 +17,16 @@ app.use((req, res, next) =>{
     //Website que serão permitidos conectar a api
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Request methods you wish to allow
+    // Request metodos aceitos
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
 
-    // Request headers you wish to allow
+    // Request headers aceitos
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, token');
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    // true se precisar que o site inclua cookies na requisição recebida
+    // (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', false);
 
-    // Pass to next layer of middleware
     next();
 });
 
@@ -42,7 +41,7 @@ app.use((req, res, next) => {
 
 
 //models
-//const models = require('./src/models/modelo');
+const user = require('./src/models/user');
 
 
 //routers

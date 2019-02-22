@@ -1,29 +1,40 @@
-
-{   
-    "App":{
+{
+    "App": {
         "name": "Agenda Medica"
     },
     "Server": {
         "port": "3000",
         "name": "Agenda Server"
     },
-    "ConnectBD": {
+    "Connect": {
         "MongoDB": {
-            "mLab":{
-                "name": "mLab"
-
+            "mLab": {
+                "name": "mLab",
+                "user": "henrique",
+                "password": "diga33",
+                "dominio": "ds111244.mlab.com",
+                "port": "11244",
+                "dataBaseName": "nodedb",
+                "initConnectString": "mongodb://"
             },
-            "mongoDbAtlas":{
-
+            "mongoDbAtlas": {
+                "name": "MongoAtlas",
+                "user": "henrique",
+                "password": "unTy6cuxvaXDTscE",
+                "dominio": "hpsinf-xwblh.gcp.mongodb.net",
+                "port": "27017",
+                "databasename": "hpsinf",
+                "initConnectString": "mongodb+srv://"
             }
         }
-
     },
-    "Keys":{
+    "Keys": {
         "onlyRead": "lhsandnhdldfmmdf",
-        "readWrite": "njednhfmmsnhdnnm"
+        "readWrite": "njednhfmmsnhdnnm",
+        "sendGrid": "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",
+        "comtele": "bd08f6b0-eaa3-48eb-8e98-9fee38e4bd93"
+    },
+    "Email": {
+        "templete": "Olá, seja bem vindo <strong>{0}</strong>, cadastrado efetuado em "
     }
 }
-
-
-

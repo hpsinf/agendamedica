@@ -88,4 +88,6 @@ firebase.json
 public/
 .firebase/
 
+#file test
+test.rest
 # End of https://www.gitignore.io/api/node

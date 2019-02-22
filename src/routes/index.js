@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 //Rotas
-//router.use('/clientes', require('./clientes'));
+router.use('/users', require('./users'));
 
 
 module.exports = router;
