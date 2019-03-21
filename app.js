@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 
 //models
 const user = require('./src/models/user');
+const paciente = require('./src/models/paciente');
 
 
 //routers

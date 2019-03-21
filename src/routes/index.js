@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 
 //Rotas
 router.use('/users', require('./users'));
+router.use('/pacientes', require('./pacientes'));
 
 
 module.exports = router;
