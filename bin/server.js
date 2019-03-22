@@ -10,7 +10,6 @@ app.listen(port, function () {
     console.log(`${config.get('Server.name')} em ${port}`)
 });
 
-
 //Error handling
 app.use((req, res, next) => {
     var err = new Error('Url não existe');

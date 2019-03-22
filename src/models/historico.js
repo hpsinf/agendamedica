@@ -35,4 +35,4 @@ const model = new schema({
     }
 });
 
-module.exports = mongoose.model('consulta', model);
+module.exports = mongoose.model('historico', model);

@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Permissões de headers
-app.use((req, res, next) =>{
+app.use((req, res, next) => {
 
     //Website que serão permitidos conectar a api
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -41,8 +41,15 @@ app.use((req, res, next) => {
 
 
 //models
-const user = require('./src/models/user');
-const paciente = require('./src/models/paciente');
+const user = require('./src/models/user'),
+    paciente = require('./src/models/paciente'),
+    clinica = require('./src/models/clinica'),
+    especialidade = require('./src/models/especialidade'),
+    profissional_especialista = require('./src/models/profissional_especialista'),
+    profissional_clinico = require('./src/models/profissional_clinico'),
+    agenda = require('./src/models/agenda'),
+    consulta = require('./src/models/consulta'),
+    historico = require('./src/models/historico');
 
 
 //routers
