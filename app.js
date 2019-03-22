@@ -8,7 +8,7 @@ const config = require('config');
 
 //Middlewares 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Permissões de headers

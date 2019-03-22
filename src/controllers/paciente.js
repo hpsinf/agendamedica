@@ -2,6 +2,7 @@
 
 
 const repo = require('../repositories/paciente');
+const moment = require('moment');
 
 
 exports.getAll = async (req, res, next) => {
@@ -29,7 +30,7 @@ exports.get = async (req, res, next) => {
 exports.post = async (req, res, next) => {
     let nome = req.body.nome || req.params.nome;
     let genero = req.body.genero || req.params.genero;
-    let data_nascimento = req.body.data_nascimento || req.params.data_nascimento;
+    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento, 'DD-MM-YYYY').format();;
     //if (req.body.especial || req.params.especial)
     let especial = req.body.especial || req.params.especial;
     let observacao = req.body.observacao || req.params.observacao;    
