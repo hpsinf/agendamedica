@@ -12,7 +12,7 @@ const model = new schema({
     genero: {
         type: String,
         required: true,
-        enum: ['Masculino', 'Feminino']
+        enum: ['Masculino', 'Feminino', 'Indefinido']
     },
     data_nascimento: {
         type: Date,
