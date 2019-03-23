@@ -1,9 +1,6 @@
 'use strict'
 
-
-const repo = require('../repositories/paciente');
-const moment = require('moment');
-
+const repo = require('../repositories/profissional_especialista');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -29,22 +26,14 @@ exports.get = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     let nome = req.body.nome || req.params.nome;
-    let genero = req.body.genero || req.params.genero;
-    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento, 'DD-MM-YYYY').format();
-    let especial = req.body.especial || req.params.especial;
-    let observacao = req.body.observacao || req.params.observacao;    
 
     let dados = {
-        nome: nome,
-        genero: genero,
-        data_nascimento: data_nascimento,
-        especial: especial,
-        observacao: observacao
+        nome: nome
     }
 
     try {
         await repo.create(dados);
-        res.status(201).send({ messege: 'Cadastrado efetuado!', paciente: dados });
+        res.status(201).send({ messege: 'Cadastrado efetuado!', profissional_especialiasta: dados });
     } catch (err) {
         res.status(500).send({
             messege: 'Falha ao cadastrar Paciente!', data: err

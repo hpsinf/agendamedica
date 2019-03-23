@@ -12,6 +12,10 @@ router.get('/', (req, res) => {
 //Rotas
 router.use('/users', require('./users'));
 router.use('/pacientes', require('./pacientes'));
+router.use('/clinicas', require('./clinicas'));
+router.use('/especialidades', require('./especialidades'));
+router.use('/profissionais_clinicos', require('./profissionais_clinicos'));
+router.use('/profissionais_especialistas', require('./profissionais_especialistas'));
 
 
 module.exports = router;
