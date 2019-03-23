@@ -4,6 +4,9 @@
 const repo = require('../repositories/agenda');
 const moment = require('moment');
 
+moment.locale('pt-BR');
+
+
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -60,7 +63,7 @@ exports.getByIdPaciente = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     const datahora_agendamento =
-        moment(req.body.datahora_agendamento || req.params.datahora_agendamento || req.query.datahora_agendamento, 'DD-MM-YYYY HH:mm', 'America/Brasilia').format();
+        moment.utc(req.body.datahora_agendamento || req.params.datahora_agendamento || req.query.datahora_agendamento, 'DD-MM-YYYY HH:mm').format();
     
     const observacao = req.body.observacao || req.params.observacao || req.query.observacao;
     const idpaciente = req.body.idpaciente || req.params.idpaciente || req.query.idpaciente;
