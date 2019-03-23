@@ -25,7 +25,7 @@ exports.get = async (req, res, next) => {
 }
 
 exports.post = async (req, res, next) => {
-    let nome = req.body.nome || req.params.nome;
+    let nome = req.body.nome || req.params.nome || req.query.nome;
 
     let dados = {
         nome: nome

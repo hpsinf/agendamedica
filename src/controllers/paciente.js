@@ -28,11 +28,11 @@ exports.get = async (req, res, next) => {
 }
 
 exports.post = async (req, res, next) => {
-    let nome = req.body.nome || req.params.nome;
-    let genero = req.body.genero || req.params.genero;
-    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento, 'DD-MM-YYYY').format();
-    let especial = req.body.especial || req.params.especial;
-    let observacao = req.body.observacao || req.params.observacao;    
+    let nome = req.body.nome || req.params.nome || req.query.nome;
+    let genero = req.body.genero || req.params.genero || req.query.genero;
+    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento || req.query.data_nascimento, 'DD-MM-YYYY').format();
+    let especial = req.body.especial || req.params.especial || req.query.especial;
+    let observacao = req.body.observacao || req.params.observacao || req.query.observacao;    
 
     let dados = {
         nome: nome,
