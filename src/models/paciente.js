@@ -7,7 +7,8 @@ const model = new schema({
     nome: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     genero: {
         type: String,

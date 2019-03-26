@@ -20,17 +20,17 @@ exports.getById = async (id) => {
 }
 
 exports.getByNome = async (nome) => {
-    const res = await Paciente.findOne(nome, 'nome genero data_nascimento especial status data_criacao observacao');
+    const res = await Paciente.findOne({nome: new RegExp('^'+nome, 'ig')}, 'nome genero data_nascimento especial status data_criacao observacao');
     return res;
 }
 
-exports.update = async (data) => {
+exports.updatePatch = async (id, data) => {
     const res = await Paciente.findByIdAndUpdate(id, data);
     return res;
 }
 
-exports.delete = async (data) => {
-    const res = await Paciente.findByIdAndDelete(id, data);
+exports.delete = async (id) => {
+    const res = await Paciente.findByIdAndDelete(id);
     return res;
 }
 
