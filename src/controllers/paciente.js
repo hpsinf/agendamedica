@@ -32,7 +32,7 @@ exports.getByNome = async (req, res, next) => {
     if (nome) {
         try {
             var data = await repo.getByNome(nome);
-            if (data)
+            if (data !== '[]')
                 res.status(200).send(data);
             else
                 res.status(200).send({ messege: 'Nome não encontrado na base de dados' });
