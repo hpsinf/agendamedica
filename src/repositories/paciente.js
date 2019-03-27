@@ -20,7 +20,7 @@ exports.getById = async (id) => {
 }
 
 exports.getByNome = async (nome) => {
-    const res = await Paciente.findOne({nome: new RegExp('^'+nome, 'ig')}, 'nome genero data_nascimento especial status data_criacao observacao');
+    const res = await Paciente.find({nome: new RegExp('^'+nome, 'ig')}, 'nome genero data_nascimento especial status data_criacao observacao');
     return res;
 }
 
