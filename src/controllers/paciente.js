@@ -4,11 +4,20 @@
 const repo = require('../repositories/paciente');
 const moment = require('moment');
 
+let cachePacientes = {};
 
 exports.getAll = async (req, res, next) => {
     try {
-        var data = await repo.getAll();
-        res.status(200).send(data);
+        if (cachePacientes.length !== undefined) {
+            res.status(200).send(cachePacientes);
+        } else {
+            var data = await repo.getAll();
+            cachePacientes = data;
+            res.status(200).send(data);
+            setTimeout(() => {
+                cachePacientes = {};
+            }, 90000);
+        }
     } catch (e) {
         res.status(500).send({
             messege: 'Falha ao processar requisição!'
@@ -32,10 +41,10 @@ exports.getByNome = async (req, res, next) => {
     if (nome) {
         try {
             var data = await repo.getByNome(nome);
-            if (data !== '[]')
+            if (data.length !== 0)
                 res.status(200).send(data);
             else
-                res.status(200).send({ messege: 'Nome não encontrado na base de dados' });
+                res.status(200).send({ messege: 'Nome de paciente não encontrado na base de dados' });
         } catch (e) {
             res.status(500).send({
                 messege: 'Falha ao processar requisição!'
@@ -44,7 +53,7 @@ exports.getByNome = async (req, res, next) => {
     } else {
         res.status(204).send({
             messege: 'Nome não encontrado na requisição para efetuar uma consulta'
-        })
+        });
     }
 }
 exports.post = async (req, res, next) => {
@@ -87,7 +96,7 @@ exports.patch = async (req, res, next) => {
     } else {
         res.status(204).send({
             messege: 'ID e Body não encontrado na requisição para efetuar a operação'
-        })
+        });
     }
 }
 
@@ -105,6 +114,6 @@ exports.delete = async (req, res, next) => {
     } else {
         res.status(204).send({
             messege: 'ID não encontrado na requisição para efetuar a operação'
-        })
+        });
     }
 }

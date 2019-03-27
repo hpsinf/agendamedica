@@ -5,7 +5,7 @@ const pacienteRoute = express.Router();
 const controller = require('../controllers/paciente');
 const auth = require('../../services/auth');
 
-pacienteRoute.get('/', controller.get);
+pacienteRoute.get('/', controller.getAll);
 pacienteRoute.get('/:nome', controller.getByNome);
 
 pacienteRoute.post('/cadastrar', controller.post);
