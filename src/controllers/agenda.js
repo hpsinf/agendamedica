@@ -3,18 +3,25 @@
 
 const repo = require('../repositories/agenda');
 const moment = require('moment');
-
 moment.locale('pt-BR');
 
-
+let cacheAgenda = {};
 
 exports.getAll = async (req, res, next) => {
     try {
-        var data = await repo.getAll();
-        res.status(200).send(data);
+        if (cacheAgenda.length !== undefined) {
+            res.status(200).send(cacheAgenda);
+        } else {
+            var data = await repo.getAll();
+            cacheAgenda = data;
+            res.status(200).send(data);
+            setTimeout(() => {
+                cacheAgenda = {};
+            }, 900000);
+        }
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -25,7 +32,7 @@ exports.get = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -37,7 +44,7 @@ exports.getById = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -51,12 +58,12 @@ exports.getByIdPaciente = async (req, res, next) => {
         }
         else {
             res.status(204).send({
-                messege: 'idpaciente vazio!'
+                mensagem: 'idpaciente vazio!'
             });
         }
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -64,7 +71,7 @@ exports.getByIdPaciente = async (req, res, next) => {
 exports.post = async (req, res, next) => {
     const datahora_agendamento =
         moment.utc(req.body.datahora_agendamento || req.params.datahora_agendamento || req.query.datahora_agendamento, 'DD-MM-YYYY HH:mm').format();
-    
+
     const observacao = req.body.observacao || req.params.observacao || req.query.observacao;
     const idpaciente = req.body.idpaciente || req.params.idpaciente || req.query.idpaciente;
     const idclinica = req.body.idclinica || req.params.idclinica || req.query.idclinica;
@@ -84,10 +91,10 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ messege: 'Cadastrado efetuado!', agenda: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', agenda: dados });
     } catch (err) {
         res.status(500).send({
-            messege: 'Falha ao cadastrar Paciente!', data: err
+            mensagem: 'Falha ao cadastrar Paciente!', data: err
         });
     }
 }

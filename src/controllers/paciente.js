@@ -20,7 +20,7 @@ exports.getAll = async (req, res, next) => {
         }
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -31,7 +31,7 @@ exports.get = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -44,15 +44,15 @@ exports.getByNome = async (req, res, next) => {
             if (data.length !== 0)
                 res.status(200).send(data);
             else
-                res.status(200).send({ messege: 'Nome de paciente não encontrado na base de dados' });
+                res.status(200).send({ mensagem: 'Nome de paciente não encontrado na base de dados' });
         } catch (e) {
             res.status(500).send({
-                messege: 'Falha ao processar requisição!'
+                mensagem: 'Falha ao processar requisição!'
             });
         }
     } else {
         res.status(204).send({
-            messege: 'Nome não encontrado na requisição para efetuar uma consulta'
+            mensagem: 'Nome não encontrado na requisição para efetuar uma consulta'
         });
     }
 }
@@ -73,10 +73,10 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ messege: 'Cadastrado efetuado!', paciente: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', paciente: dados });
     } catch (err) {
         res.status(500).send({
-            messege: 'Falha ao cadastrar Paciente!', data: err
+            mensagem: 'Falha ao cadastrar Paciente!', data: err
         });
     }
 }
@@ -90,12 +90,12 @@ exports.patch = async (req, res, next) => {
             res.status(200).send('Alterado com sucesso');
         } catch (err) {
             res.status(500).send({
-                messege: 'Falha ao Atualizar!', data: err
+                mensagem: 'Falha ao Atualizar!', data: err
             });
         }
     } else {
         res.status(204).send({
-            messege: 'ID e Body não encontrado na requisição para efetuar a operação'
+            mensagem: 'ID e Body não encontrado na requisição para efetuar a operação'
         });
     }
 }
@@ -108,12 +108,12 @@ exports.delete = async (req, res, next) => {
             res.status(200).send('Excluido com sucesso');
         } catch (err) {
             res.status(500).send({
-                messege: 'Falha ao excluir!', data: err
+                mensagem: 'Falha ao excluir!', data: err
             });
         }
     } else {
         res.status(204).send({
-            messege: 'ID não encontrado na requisição para efetuar a operação'
+            mensagem: 'ID não encontrado na requisição para efetuar a operação'
         });
     }
 }

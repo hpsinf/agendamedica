@@ -14,7 +14,7 @@ exports.getAll = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -25,7 +25,7 @@ exports.get = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -43,10 +43,10 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ messege: 'Cadastrado efetuado!', user: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', user: dados });
     } catch (err) {
         res.status(500).send({
-            messege: 'Falha ao cadastrar Cliente!', data: err
+            mensagem: 'Falha ao cadastrar Cliente!', data: err
         });
     }
 }
@@ -72,7 +72,7 @@ exports.getAuth = async (req, res, next) => {
         
     } catch (err) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!', erro: err
+            mensagem: 'Falha ao processar requisição!', erro: err
         });
     }
 }

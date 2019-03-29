@@ -8,7 +8,7 @@ exports.getAll = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -19,7 +19,7 @@ exports.get = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            messege: 'Falha ao processar requisição!'
+            mensagem: 'Falha ao processar requisição!'
         });
     }
 }
@@ -33,10 +33,10 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ messege: 'Cadastrado efetuado!', clinica: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', clinica: dados });
     } catch (err) {
         res.status(500).send({
-            messege: 'Falha ao cadastrar Paciente!', data: err
+            mensagem: 'Falha ao cadastrar Paciente!', data: err
         });
     }
 }
