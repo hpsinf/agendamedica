@@ -19,14 +19,14 @@ exports.authorize = async (req, res, next) => {
     var token = req.body.token || req.query.token || req.headers['x-access-token', 'token'];
     if (!token) {
         res.status(401).json({
-            message: 'Acesso Restrito'
+            mensagem: 'Acesso Restrito'
         });
         return;
     }
     jwt.verify(token, key, (error, decoded) => {
         if (error) {
             res.status(401).json({
-                message: 'Token Inválido'
+                mensagem: 'Token Inválido'
             });
             return;
         }
