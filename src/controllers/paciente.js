@@ -9,7 +9,7 @@ let cachePacientes = {};
 exports.getAll = async (req, res, next) => {
     try {
         if (cachePacientes.length !== undefined) {
-            res.status(204).send(cachePacientes);
+            res.status(200).send(cachePacientes);
         } else {
             var data = await repo.getAll();
             cachePacientes = data;
