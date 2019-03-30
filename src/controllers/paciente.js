@@ -45,7 +45,7 @@ exports.getByNome = async (req, res, next) => {
             if (data.length !== 0)
                 res.status(200).send(data);
             else
-                res.status(200).send({ mensagem: 'Nome de paciente não encontrado na base de dados' });
+                res.status(200).send([{ mensagem: 'Nome de paciente não encontrado na base de dados' }]);
         } catch (e) {
             res.status(500).send({
                 mensagem: 'Falha ao processar requisição!'
