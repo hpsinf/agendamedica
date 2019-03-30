@@ -16,7 +16,7 @@ exports.getAll = async (req, res, next) => {
             res.status(200).send(data);
             setTimeout(() => {
                 cachePacientes = {};
-            }, 90000);
+            }, 3000);
         }
     } catch (e) {
         res.status(500).send({
