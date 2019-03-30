@@ -36,6 +36,7 @@ exports.get = async (req, res, next) => {
     }
 }
 
+
 exports.getByNome = async (req, res, next) => {
     let nome = req.body.nome || req.params.nome || req.query.nome;
     if (nome) {
