@@ -45,6 +45,7 @@
         "id_BodyNaoEncontrado": "ID e Body não encontrado na requisição para efetuar a operação",
         "idNaoEncontrado": "ID não encontrado na requisição para efetuar a operação",
         "acessoRestrito": "Acesso Restrito",
-        "tokenInvalido": "Token Inválido"
+        "tokenInvalido": "Token Inválido",
+        "idPacienteVazia": "idpaciente Vazia"
     }
 }

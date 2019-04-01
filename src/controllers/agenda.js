@@ -1,83 +1,85 @@
+/* eslint-disable no-undef */
 'use strict'
 
 
-const repo = require('../repositories/agenda');
-const moment = require('moment');
-moment.locale('pt-BR');
+const repo = require('../repositories/agenda')
+const moment = require('moment')
+const config = require('../../config/default.json')
+moment.locale('pt-BR')
 
-let cacheAgenda = {};
+let cacheAgenda = {}
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = async (req, res) => {
     try {
         if (cacheAgenda.length !== undefined) {
-            res.status(200).send(cacheAgenda);
+            res.status(200).send(cacheAgenda)
         } else {
-            var data = await repo.getAll();
+            var data = await repo.getAll()
             cacheAgenda = data;
-            res.status(200).send(data);
+            res.status(200).send(data)
             setTimeout(() => {
-                cacheAgenda = {};
+                cacheAgenda = {}
             }, 900000);
         }
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }]);
     }
 }
 
-exports.get = async (req, res, next) => {
+exports.get = async (req, res) => {
     try {
-        var data = await repo.getAll();
-        res.status(200).send(data);
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+        var data = await repo.getAll()
+        res.status(200).send(data)
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
-exports.getById = async (req, res, next) => {
-    let idAgenda = req.params.idagenda || req.body.idagenda;
+exports.getById = async (req, res) => {
+    let idAgenda = req.params.idagenda || req.body.idagenda || req.query.idagenda
     try {
-        var data = await repo.getById(idAgenda);
-        res.status(200).send(data);
-    } catch (e) {
+        var data = await repo.getById(idAgenda)
+        res.status(200).send(data)
+    } catch (err) {
         res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
+            mensagem: config.Msg.statusCode500, erro: err
         });
     }
 }
 
-exports.getByIdPaciente = async (req, res, next) => {
-    let idpaciente = req.params.idpaciente || req.body.idpaciente;
+exports.getByIdPaciente = async (req, res) => {
+    let idpaciente = req.params.idpaciente || req.body.idpaciente || req.query.idpaciente
     try {
         if (idpaciente) {
-            var data = await repo.getByIdPaciente(idpaciente);
-            res.status(200).send(data);
+            var data = await repo.getByIdPaciente(idpaciente)
+            res.status(200).send(data)
         }
         else {
-            res.status(204).send({
-                mensagem: 'idpaciente vazio!'
-            });
+            res.status(204).send([{
+                mensagem: config.Msg.idPacienteVazia
+            }])
         }
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
-exports.post = async (req, res, next) => {
+exports.post = async (req, res) => {
     const datahora_agendamento =
-        moment.utc(req.body.datahora_agendamento || req.params.datahora_agendamento || req.query.datahora_agendamento, 'DD-MM-YYYY HH:mm').format();
+        moment.utc(req.body.datahora_agendamento || req.params.datahora_agendamento || req.query.datahora_agendamento, 'DD-MM-YYYY HH:mm').format()
 
-    const observacao = req.body.observacao || req.params.observacao || req.query.observacao;
-    const idpaciente = req.body.idpaciente || req.params.idpaciente || req.query.idpaciente;
-    const idclinica = req.body.idclinica || req.params.idclinica || req.query.idclinica;
-    const idprofissional_clinico = req.body.idprofissional_clinico || req.params.idprofissional_clinico || req.query.idprofissional_clinico;
-    const idprofissional_especialista = req.body.idprofissional_especialista || req.params.idprofissional_especialista || req.query.idprofissional_especialista;
-    const idespecialidade = req.body.idespecialidade || req.params.idespecialidade || req.query.idespecialidade;
+    const observacao = req.body.observacao || req.params.observacao || req.query.observacao
+    const idpaciente = req.body.idpaciente || req.params.idpaciente || req.query.idpaciente
+    const idclinica = req.body.idclinica || req.params.idclinica || req.query.idclinica
+    const idprofissional_clinico = req.body.idprofissional_clinico || req.params.idprofissional_clinico || req.query.idprofissional_clinico
+    const idprofissional_especialista = req.body.idprofissional_especialista || req.params.idprofissional_especialista || req.query.idprofissional_especialista
+    const idespecialidade = req.body.idespecialidade || req.params.idespecialidade || req.query.idespecialidade
 
     let dados = {
         datahora_agendamento: datahora_agendamento,
@@ -90,11 +92,23 @@ exports.post = async (req, res, next) => {
     }
 
     try {
-        await repo.create(dados);
-        res.status(201).send({ mensagem: 'Cadastrado efetuado!', agenda: dados });
+        await repo.create(dados)
+        res.status(201).send([{ mensagem: config.Msg.statusCode200, agenda: dados }])
     } catch (err) {
-        res.status(500).send({
-            mensagem: 'Falha ao cadastrar Paciente!', data: err
-        });
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
+    }
+}
+
+exports.delete = async (req, res) => {
+    let idAgenda = req.params.idagenda || req.body.idagenda || req.query.idagenda
+    try {
+        var data = await repo.delete(idAgenda)
+        res.status(200).send(data)
+    } catch (e) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500
+        }]);
     }
 }

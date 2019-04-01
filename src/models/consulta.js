@@ -1,7 +1,7 @@
-'use strict'
+/* eslint-disable no-undef */
 
-const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const schema = mongoose.Schema
 
 const model = new schema({
     datahora_inicio: {
@@ -13,19 +13,23 @@ const model = new schema({
     },
     tipo_consulta: {
         type: String,
-        required: true,
-        enum: ['Presencial', 'Remota'],
-        default: 'Remota'
+        enum: ['Presencial', 'Remota'],         
     },
     observacao: {
         type: String,
         trim: true
     },
+    situacao: {
+        type: String,
+        required: true,
+        enum: ['Atendida', 'Em Atendimento', 'Cancelada'],
+        default: 'Em Atendimento'
+    },
     status: {
         type: String,
         required: true,
-        enum: ['Agendado', 'Reagendado', 'Atendido', 'Cancelado'],
-        default: 'Agendado'
+        enum: ['Ativo', 'Inativo'],
+        default: 'Ativo'
     },
     data_criacao: {
         type: Date,
@@ -36,27 +40,7 @@ const model = new schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'paciente',
         required: true
-    },
-    clinica: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'clinica',
-        required: true
-    },
-    profissional_especialista: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'profissional_especialista',
-        required: true
-    },
-    profissional_clinico: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'profissional_clinico',
-        required: true
-    },
-    especialidade: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'especialidade',
-        required: true
-    },
+    },      
     agenda: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'agenda',
@@ -70,8 +54,8 @@ const model = new schema({
         type: String,
         enum: ['Sim', 'Nao']
     }
-});
+})
 
-module.exports = mongoose.model('consulta', model);
+module.exports = mongoose.model('consulta', model)
 
 

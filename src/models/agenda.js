@@ -1,4 +1,4 @@
-'use strict'
+/* eslint-disable no-undef */
 
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
@@ -16,6 +16,12 @@ const model = new schema({
         trim: true
     },
     status: {
+        type: String,
+        required: true,
+        enum: ['Ativo', 'Inativo'],
+        default: 'Ativo'
+    },
+    situacao: {
         type: String,
         required: true,
         enum: ['Agendado', 'Reagendado', 'Atendido', 'Cancelado'],

@@ -1,9 +1,10 @@
-'use strict'
+/* eslint-disable no-undef */
+
 
 const express = require('express')
 const pacienteRoute = express.Router()
 const controller = require('../controllers/paciente')
-const auth = require('../../services/auth')
+//const auth = require('../../services/auth')
 
 pacienteRoute.get('/', controller.get)
 pacienteRoute.get('/:nome', controller.getByNome)

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 const repo = require('../repositories/paciente')
 const moment = require('moment')
@@ -7,7 +8,7 @@ const config = require('../../config/default.json')
 let cachePacientes = {}
 
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = async (req, res) => {
     try {
         if (cachePacientes.length !== undefined) {
             res.status(200).send(cachePacientes);
@@ -27,7 +28,7 @@ exports.getAll = async (req, res, next) => {
 }
 
 
-exports.get = async (req, res, next) => {
+exports.get = async (req, res) => {
     try {
         if (cachePacientes.length !== undefined) {
             res.status(200).send(cachePacientes)
@@ -47,7 +48,7 @@ exports.get = async (req, res, next) => {
 }
 
 
-exports.getByNome = async (req, res, next) => {
+exports.getByNome = async (req, res) => {
     let nome = req.body.nome || req.params.nome || req.query.nome
     if (nome) {
         try {
@@ -66,7 +67,7 @@ exports.getByNome = async (req, res, next) => {
     }
 }
 
-exports.post = async (req, res, next) => {
+exports.post = async (req, res) => {
     let nome = req.body.nome || req.params.nome || req.query.nome;
     let genero = req.body.genero || req.params.genero || req.query.genero;
     let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento || req.query.data_nascimento, 'DD-MM-YYYY').format();
@@ -91,7 +92,7 @@ exports.post = async (req, res, next) => {
     }
 }
 
-exports.patch = async (req, res, next) => {
+exports.patch = async (req, res) => {
     let id = req.body.id || req.params.id || req.query.id
     let body = req.body
     if (id && body) {
@@ -110,7 +111,7 @@ exports.patch = async (req, res, next) => {
     }
 }
 
-exports.delete = async (req, res, next) => {
+exports.delete = async (req, res) => {
     let id = req.body.id || req.params.id || req.query.id;
     if (id) {
         try {

@@ -1,7 +1,7 @@
-'use strict'
+/* eslint-disable no-undef */
 
-const mongoose = require('mongoose');
-const Agenda = mongoose.model('agenda');
+const mongoose = require('mongoose')
+const Agenda = mongoose.model('agenda')
 
 
 exports.getAll = async () => {
@@ -15,7 +15,7 @@ exports.getAll = async () => {
 }
 
 exports.get = async () => {
-    const res = await Agenda.find({ status: 'Agendado' }, 'datahora_agendamento datahora_comparecimento status observacao data_criacao').
+    const res = await Agenda.find({ status: 'Ativo' }, 'datahora_agendamento datahora_comparecimento situacao observacao data_criacao').
         populate('paciente').
         populate('clinica').
         populate('profissional_especialista').
@@ -39,13 +39,13 @@ exports.getByIdPaciente = async (idpaciente) => {
     return res;
 }
 
-exports.update = async (data) => {
+exports.update = async (id, data) => {
     const res = await Agenda.findByIdAndUpdate(id, data);
     return res;
 }
 
-exports.delete = async (data) => {
-    const res = await Agenda.findByIdAndDelete(id, data);
+exports.delete = async (id) => {
+    const res = await Agenda.findByIdAndDelete(id);
     return res;
 }
 

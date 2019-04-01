@@ -1,4 +1,5 @@
-'use strict'
+/* eslint-disable no-undef */
+
 
 const mongoose = require('mongoose');
 const Clinica = mongoose.model('clinica');
