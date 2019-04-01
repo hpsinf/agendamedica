@@ -10,14 +10,14 @@ let cachePacientes = {}
 exports.getAll = async (req, res, next) => {
     try {
         if (cachePacientes.length !== undefined) {
-            res.status(204).send(cachePacientes)
+            res.status(200).send(cachePacientes);
         } else {
             var data = await repo.getAll()
             cachePacientes = data
             res.status(200).send(data)
             setTimeout(() => {
-                cachePacientes = {}
-            }, 90000)
+                cachePacientes = {};
+            }, 3000);
         }
     } catch (err) {
         res.status(500).send([{
@@ -45,6 +45,7 @@ exports.get = async (req, res, next) => {
         }])
     }
 }
+
 
 exports.getByNome = async (req, res, next) => {
     let nome = req.body.nome || req.params.nome || req.query.nome
