@@ -1,17 +1,24 @@
-'use strict'
 
-const sendgrid = require('@sendgrid/mail');
-const config = require('config');
-key = config.get('Keys.sendGrid');
-sendgrid.setApiKey(key);
+const sendgrid = require('@sendgrid/mail')
+const config = require('../config/default.jason')
 
+sendgrid.setApiKey(config.Keys.sendGrid);
+
+/**
+ *
+ *
+ * @param {*} to
+ * @param {*} subject
+ * @param {*} text
+ * @param {*} body
+ */
 exports.send = async (to, subject, text, body) => {
     var msg = {
         to: to,
-        from: 'apibase-nao-renponda@mail.com',
+        from: 'webmed-nao-renponder@email.com',
         subject: subject,
         text: text,
         html: body
     }
-    sendgrid.send(msg);
+    sendgrid.send(msg)
 }

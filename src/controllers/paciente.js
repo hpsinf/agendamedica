@@ -1,61 +1,70 @@
-'use strict'
+
+const repo = require('../repositories/paciente')
+const moment = require('moment')
+const config = require('../../config/default.json')
 
 
-const repo = require('../repositories/paciente');
-const moment = require('moment');
+let cachePacientes = {}
 
-let cachePacientes = {};
 
 exports.getAll = async (req, res, next) => {
     try {
         if (cachePacientes.length !== undefined) {
-            res.status(204).send(cachePacientes);
+            res.status(204).send(cachePacientes)
         } else {
-            var data = await repo.getAll();
-            cachePacientes = data;
-            res.status(200).send(data);
+            var data = await repo.getAll()
+            cachePacientes = data
+            res.status(200).send(data)
             setTimeout(() => {
-                cachePacientes = {};
-            }, 90000);
+                cachePacientes = {}
+            }, 90000)
         }
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
+
 exports.get = async (req, res, next) => {
     try {
-        var data = await repo.getAll();
-        res.status(200).send(data);
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+        if (cachePacientes.length !== undefined) {
+            res.status(204).send(cachePacientes)
+        } else {
+            var data = await repo.get()
+            cachePacientes = data
+            res.status(200).send(data)
+            setTimeout(() => {
+                cachePacientes = {}
+            }, 3000)
+        }
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
 exports.getByNome = async (req, res, next) => {
-    let nome = req.body.nome || req.params.nome || req.query.nome;
+    let nome = req.body.nome || req.params.nome || req.query.nome
     if (nome) {
         try {
-            var data = await repo.getByNome(nome);
+            var data = await repo.getByNome(nome)
             if (data.length !== 0)
-                res.status(200).send(data);
+                res.status(200).send(data)
             else
-                res.status(200).send({ mensagem: 'Nome de paciente não encontrado na base de dados' });
+                res.status(200).send([{ mensagem: config.Msg.nomeNaoEncontrado }])
         } catch (e) {
-            res.status(500).send({
-                mensagem: 'Falha ao processar requisição!'
-            });
+            res.status(500).send([{
+                mensagem: config.Msg.statusCode500
+            }]);
         }
     } else {
-        res.status(204).send({
-            mensagem: 'Nome não encontrado na requisição para efetuar uma consulta'
-        });
+        res.status(204).send([{ mensagem: config.Msg.nomeNaoEncontrado }])
     }
 }
+
 exports.post = async (req, res, next) => {
     let nome = req.body.nome || req.params.nome || req.query.nome;
     let genero = req.body.genero || req.params.genero || req.query.genero;
@@ -72,31 +81,31 @@ exports.post = async (req, res, next) => {
     }
 
     try {
-        await repo.create(dados);
-        res.status(201).send({ mensagem: 'Cadastrado efetuado!', paciente: dados });
+        await repo.create(dados)
+        res.status(201).send([{ mensagem: config.Msg.statusCode200, paciente: dados }])
     } catch (err) {
-        res.status(500).send({
-            mensagem: 'Falha ao cadastrar Paciente!', data: err
-        });
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
 exports.patch = async (req, res, next) => {
-    let id = req.body.id || req.params.id || req.query.id;
-    let body = req.body;
+    let id = req.body.id || req.params.id || req.query.id
+    let body = req.body
     if (id && body) {
         try {
             await repo.updatePatch(id, body)
-            res.status(200).send('Alterado com sucesso');
+            res.status(200).send([{ mensagem: config.Msg.statusCode200 }])
         } catch (err) {
-            res.status(500).send({
-                mensagem: 'Falha ao Atualizar!', data: err
-            });
+            res.status(500).send([{
+                mensagem: config.Msg.statusCode500, erro: err
+            }])
         }
     } else {
-        res.status(204).send({
-            mensagem: 'ID e Body não encontrado na requisição para efetuar a operação'
-        });
+        res.status(204).send([{
+            mensagem: config.Msg.id_BodyNaoEncontrado
+        }])
     }
 }
 
@@ -104,16 +113,19 @@ exports.delete = async (req, res, next) => {
     let id = req.body.id || req.params.id || req.query.id;
     if (id) {
         try {
-            await repo.delete(id)
-            res.status(200).send('Excluido com sucesso');
+            /*
+            Nenhum documento pode ser excluído, apenas alterado o status para Inativo            
+            */
+            await repo.updatePatch(id, { status: 'Inativo' })
+            res.status(200).send([{ mensagem: config.Msg.statusCode200 }])
         } catch (err) {
-            res.status(500).send({
-                mensagem: 'Falha ao excluir!', data: err
-            });
+            res.status(500).send([{
+                mensagem: config.Msg.statusCode500, erro: err
+            }])
         }
     } else {
-        res.status(204).send({
-            mensagem: 'ID não encontrado na requisição para efetuar a operação'
-        });
+        res.status(204).send([{
+            mensagem: config.Msg.idNaoencontrado
+        }])
     }
 }

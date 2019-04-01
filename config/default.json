@@ -36,5 +36,15 @@
     },
     "Email": {
         "templete": "Olá, seja bem vindo <strong>{0}</strong>, cadastrado efetuado em "
+    },
+    "Msg":{
+        "statusCode200": "Operação efetuada com sucesso",
+        "statusCode500": "Falha ao processar requisição!",
+        "naoAutorizado": "Não autorizado",
+        "nomeNaoEncontrado": "Nome de paciente não encontrado na base de dados",
+        "id_BodyNaoEncontrado": "ID e Body não encontrado na requisição para efetuar a operação",
+        "idNaoEncontrado": "ID não encontrado na requisição para efetuar a operação",
+        "acessoRestrito": "Acesso Restrito",
+        "tokenInvalido": "Token Inválido"
     }
 }
