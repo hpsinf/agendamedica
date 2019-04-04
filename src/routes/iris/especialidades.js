@@ -2,8 +2,8 @@
 
 const express = require('express');
 const especialidadeRoute = express.Router();
-const controller = require('../controllers/especialidade');
-const auth = require('../../services/auth');
+const controller = require('../../controllers/iris/especialidade');
+//const auth = require('../../../services/auth');
 
 especialidadeRoute.get('/', controller.get);
 especialidadeRoute.post('/cadastrar', controller.post);

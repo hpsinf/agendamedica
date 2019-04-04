@@ -2,7 +2,7 @@
 
 const express = require('express')
 const agendaRoute = express.Router()
-const controller = require('../controllers/agenda')
+const controller = require('../../controllers/iris/agenda')
 //const auth = require('../../services/auth')
 
 agendaRoute.get('/', controller.get)

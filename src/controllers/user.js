@@ -1,24 +1,18 @@
 
 const repo = require('../repositories/user')
 const md5 = require('md5')
-const config = require('config')
-const key = config.get('Keys.readWrite')
+const config = require('../../config/default.json')
+const key = config.Keys.readWrite
 const auth = require('../../services/auth')
-
-const msgStateCode500 = 'Falha ao processar requisição!'
-const msgStateCode200 = 'Operação efetuada com sucesso'
-const msgNaoAutorizado = 'Não autorizado'
-
-
 
 exports.getAll = async (req, res, next) => {
     try {
         var data = await repo.getAll()
         res.status(200).send(data)
     } catch (err) {
-        res.status(500).send({
-            mensagem: msgStateCode500, erro: err
-        })
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
@@ -27,9 +21,9 @@ exports.get = async (req, res, next) => {
         var data = await repo.getAll()
         res.status(200).send(data)
     } catch (err) {
-        res.status(500).send({
-            mensagem: msgStateCode500, erro: err
-        });
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 
@@ -46,11 +40,11 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ mensagem: msgStateCode200, user: dados });
+        res.status(201).send([{ mensagem: config.Msg.statusCode200, user: dados }]);
     } catch (err) {
-        res.status(500).send({
-            mensagem: msgStateCode500, data: err
-        });
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, data: err
+        }])
     }
 }
 
@@ -66,17 +60,17 @@ exports.getAuth = async (req, res, next) => {
         });
 
         if (!data) {
-            return res.status(401).send({ message: msgNaoAutorizado})
+            return res.status(401).send([{mensagem: config.Msg.naoAutorizado}])
             
         }
 
         const token = await auth.generateToken({ email: data.email })
-        res.status(200).send({ token: token, user: data })
+        res.status(200).send([{token: token, user: data }])
 
     } catch (err) {
-        res.status(500).send({
-            mensagem: msgStateCode500, erro: err
-        })
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }])
     }
 }
 

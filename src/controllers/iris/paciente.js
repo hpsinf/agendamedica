@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
-const repo = require('../repositories/paciente')
+const repo = require('../../repositories/iris/paciente')
 const moment = require('moment')
-const config = require('../../config/default.json')
+const config = require('../../../config/default.json')
 
 
 let cachePacientes = {}
@@ -57,9 +57,9 @@ exports.getByNome = async (req, res) => {
                 res.status(200).send(data)
             else
                 res.status(200).send([{ mensagem: config.Msg.nomeNaoEncontrado }])
-        } catch (e) {
+        } catch (err) {
             res.status(500).send([{
-                mensagem: config.Msg.statusCode500
+                mensagem: config.Msg.statusCode500, erro: err
             }]);
         }
     } else {

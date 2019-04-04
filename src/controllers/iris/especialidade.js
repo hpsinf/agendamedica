@@ -1,15 +1,16 @@
-/* eslint-disable no-undef */
+'use strict'
 
-const repo = require('../repositories/clinica');
+const repo = require('../../repositories/iris/especialidade');
+const config = require('../../../config/default.json')
 
 exports.getAll = async (req, res, next) => {
     try {
         var data = await repo.getAll();
         res.status(200).send(data);
-    } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar requisição!'
-        });
+    } catch (err) {
+        res.status(500).send([{
+            mensagem: config.Msg.statusCode500, erro: err
+        }]);
     }
 }
 
@@ -18,9 +19,9 @@ exports.get = async (req, res, next) => {
         var data = await repo.getAll();
         res.status(200).send(data);
     } catch (e) {
-        res.status(500).send({
+        res.status(500).send([{
             mensagem: 'Falha ao processar requisição!'
-        });
+        }]);
     }
 }
 
@@ -33,7 +34,7 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ mensagem: 'Cadastrado efetuado!', clinica: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', especialidade: dados });
     } catch (err) {
         res.status(500).send({
             mensagem: 'Falha ao cadastrar Paciente!', data: err

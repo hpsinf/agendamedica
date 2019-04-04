@@ -3,7 +3,7 @@
 
 const express = require('express')
 const consultaRoute = express.Router()
-const controller = require('../controllers/consulta')
+const controller = require('../../controllers/iris/consulta')
 //const auth = require('../../services/auth')
 
 consultaRoute.get('/', controller.get)

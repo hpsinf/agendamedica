@@ -1,6 +1,6 @@
 'use strict'
 
-const repo = require('../repositories/especialidade');
+const repo = require('../../repositories/iris/profissional_especialista');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -33,7 +33,7 @@ exports.post = async (req, res, next) => {
 
     try {
         await repo.create(dados);
-        res.status(201).send({ mensagem: 'Cadastrado efetuado!', especialidade: dados });
+        res.status(201).send({ mensagem: 'Cadastrado efetuado!', profissional_especialiasta: dados });
     } catch (err) {
         res.status(500).send({
             mensagem: 'Falha ao cadastrar Paciente!', data: err

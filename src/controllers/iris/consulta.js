@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
-const repo = require('../repositories/consulta')
+const repo = require('../../repositories/iris/consulta')
 const moment = require('moment')
-const config = require('../../config/default.json')
+const config = require('../../../config/default.json')
 moment.locale('pt-BR')
 
 let cacheConsulta = {}

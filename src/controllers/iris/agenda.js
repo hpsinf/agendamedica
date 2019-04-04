@@ -2,9 +2,9 @@
 'use strict'
 
 
-const repo = require('../repositories/agenda')
+const repo = require('../../repositories/iris/agenda')
 const moment = require('moment')
-const config = require('../../config/default.json')
+const config = require('../../../config/default.json')
 moment.locale('pt-BR')
 
 let cacheAgenda = {}

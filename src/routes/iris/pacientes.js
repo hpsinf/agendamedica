@@ -3,7 +3,7 @@
 
 const express = require('express')
 const pacienteRoute = express.Router()
-const controller = require('../controllers/paciente')
+const controller = require('../../controllers/iris/paciente')
 //const auth = require('../../services/auth')
 
 pacienteRoute.get('/', controller.get)

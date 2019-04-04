@@ -1,8 +1,8 @@
 
 const express = require('express');
 const clinicaRoute = express.Router();
-const controller = require('../controllers/clinica');
-const auth = require('../../services/auth');
+const controller = require('../../controllers/iris/clinica');
+//const auth = require('../../../services/auth');
 
 clinicaRoute.get('/', controller.get);
 clinicaRoute.post('/cadastrar', controller.post);
