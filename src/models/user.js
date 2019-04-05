@@ -1,14 +1,13 @@
-'use strict'
-
-const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const schema = mongoose.Schema
 
 
 const model = new schema({
-    name: {
+    nome: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     email: {
         type: String,
@@ -27,12 +26,11 @@ const model = new schema({
         enum: ['Ativo', 'Inativo', 'Pendente'],
         default: 'Ativo'
     },
-    createdate: {
+    data_criacao: {
         type: Date,
         required: true,
         default: Date.now
     }
+})
 
-});
-
-module.exports = mongoose.model('user', model);
+module.exports = mongoose.model('user', model)

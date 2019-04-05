@@ -28,11 +28,11 @@
             }
         }
     },
-    "Keys": {
-        "onlyRead": "lhsandnhdldfmmdf",
+    "Keys": {        
         "readWrite": "njednhfmmsnhdnnm",
         "sendGrid": "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",
-        "comtele": "bd08f6b0-eaa3-48eb-8e98-9fee38e4bd93"
+        "comtele": "bd08f6b0-eaa3-48eb-8e98-9fee38e4bd93",
+        "specialKey": "teste"
     },
     "Email": {
         "templete": "Olá, seja bem vindo <strong>{0}</strong>, cadastrado efetuado em "
@@ -46,6 +46,7 @@
         "idNaoEncontrado": "ID não encontrado na requisição para efetuar a operação",
         "acessoRestrito": "Acesso Restrito",
         "tokenInvalido": "Token Inválido",
-        "idPacienteVazia": "idpaciente Vazia"
+        "idPacienteVazia": "idpaciente Vazia",
+        "erroAoGerarVerificarChave": "Erro ao gerar/verificar a chave"
     }
 }

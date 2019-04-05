@@ -1,11 +1,11 @@
-'use strict'
 
 const jwt = require('jsonwebtoken')
 const config = require('../config/default.json')
 const key = config.Keys.readWrite
+const specialkey = config.Keys.specialKey
 
-exports.generateToken = async (data) => {
-    return jwt.sign(data, key, { expiresIn: '1d' })
+exports.generateToken = async (dados) => {
+    return jwt.sign(dados, key, { expiresIn: dados.dias })
 }
 
 exports.verifiyToken = async (token) => {
@@ -29,3 +29,14 @@ exports.authorize = async (req, res, next) => {
         next()
     })
 }
+
+exports.authorizeSpecial = async (req, res, next) => {
+    var senha = req.body.senha || req.query.senha
+
+    if (senha !== specialkey)
+        return res.status(401).json([{
+            mensagem: config.Msg.tokenInvalido
+        }])
+    next()
+}
+

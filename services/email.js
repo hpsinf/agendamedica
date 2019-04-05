@@ -12,10 +12,10 @@ sendgrid.setApiKey(config.Keys.sendGrid);
  * @param {*} text
  * @param {*} body
  */
-exports.send = async (to, subject, text, body) => {
+exports.send = async (to, subject, text, body, from) => {
     var msg = {
         to: to,
-        from: 'webmed-nao-renponder@email.com',
+        from: from,
         subject: subject,
         text: text,
         html: body

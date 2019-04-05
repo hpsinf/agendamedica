@@ -3,7 +3,6 @@ const repo = require('../repositories/user')
 const md5 = require('md5')
 const config = require('../../config/default.json')
 const key = config.Keys.readWrite
-const auth = require('../../services/auth')
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -28,19 +27,19 @@ exports.get = async (req, res, next) => {
 }
 
 exports.post = async (req, res, next) => {
-    let name = req.body.name || req.params.name;
-    let email = req.body.email || req.params.email;
-    let password = req.body.password || req.params.password;
+    let nome = req.body.nome || req.params.nome || req.query.nome
+    let email = req.body.email || req.params.email || req.query.email
+    let senha = req.body.senha || req.params.senha || req.query.senha
 
     let dados = {
-        name: name,
+        nome: nome,
         email: email,
-        password: md5(email + password + key)
+        senha: md5(email + senha + key)
     }
 
     try {
-        await repo.create(dados);
-        res.status(201).send([{ mensagem: config.Msg.statusCode200, user: dados }]);
+        await repo.create(dados)
+        res.status(201).send([{ mensagem: config.Msg.statusCode200, user: dados }])
     } catch (err) {
         res.status(500).send([{
             mensagem: config.Msg.statusCode500, data: err
@@ -48,24 +47,24 @@ exports.post = async (req, res, next) => {
     }
 }
 
-exports.getAuth = async (req, res, next) => {
+exports.getAutenticacao = async (req, res, next) => {
 
-    var email = req.body.email || req.params.email || req.query.email;
-    var password = req.body.password || req.params.password || req.query.password;
+    var nome = req.body.nome || req.params.nome || req.query.nome
+    var senha = req.body.senha || req.params.senha || req.query.senha
 
     try {
-        var data = await repo.getAuth({
-            email: email,
-            password: md5(email + password + key)
+        var data = await repo.getAutenticacao({
+            nome: nome,
+            senha: md5(email + senha + key)
         });
 
         if (!data) {
-            return res.status(401).send([{mensagem: config.Msg.naoAutorizado}])
-            
-        }
+            return res.status(401).send([{ mensagem: config.Msg.naoAutorizado }])
 
-        const token = await auth.generateToken({ email: data.email })
-        res.status(200).send([{token: token, user: data }])
+        }
+        res.status(200).send([{ status: data.status }])
+        
+        //res.status(200).send([{ token: token, user: data }])
 
     } catch (err) {
         res.status(500).send([{

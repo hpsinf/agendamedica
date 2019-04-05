@@ -1,12 +1,11 @@
-'use strict'
 
-const express = require('express');
-const userRoute = express.Router();
-const controller = require('../controllers/user');
-const auth = require('../../services/auth');
+const express = require('express')
+const userRoute = express.Router()
+const controller = require('../controllers/user')
+const auth = require('../../services/auth')
 
-userRoute.get('/', auth.authorize, controller.get);
-userRoute.get('/:email/:password/auth', controller.getAuth);
-userRoute.post('/:name/:email/:password/create', controller.post);
+userRoute.get('/', auth.authorize, controller.get)
+userRoute.get('/:nome/:senha/autenticacao', controller.getAutenticacao)
+userRoute.post('/:nome/:email/:senha/cadastrar', controller.post);
 
-module.exports = userRoute;
+module.exports = userRoute
