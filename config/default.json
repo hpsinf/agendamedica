@@ -47,6 +47,7 @@
         "acessoRestrito": "Acesso Restrito",
         "tokenInvalido": "Token Inválido",
         "idPacienteVazia": "idpaciente Vazia",
-        "erroAoGerarVerificarChave": "Erro ao gerar/verificar a chave"
+        "erroAoGerarVerificarChave": "Erro ao gerar/verificar a chave",
+        "dadosInvalidos": "Dados inválidos"
     }
 }

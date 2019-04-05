@@ -35,7 +35,7 @@ exports.authorizeSpecial = async (req, res, next) => {
 
     if (senha !== specialkey)
         return res.status(401).json([{
-            mensagem: config.Msg.tokenInvalido
+            mensagem: config.Msg.dadosInvalidos
         }])
     next()
 }
