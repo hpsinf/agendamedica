@@ -29,10 +29,10 @@
         }
     },
     "Keys": {        
-        "readWrite": "njednhfmmsnhdnnm",
+        "licenca": "njednhfmmsnhdnnm",
         "sendGrid": "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",
         "comtele": "bd08f6b0-eaa3-48eb-8e98-9fee38e4bd93",
-        "specialKey": "teste"
+        "specialKey": "não me diga"
     },
     "Email": {
         "templete": "Olá, seja bem vindo <strong>{0}</strong>, cadastrado efetuado em "

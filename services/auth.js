@@ -1,7 +1,7 @@
 
 const jwt = require('jsonwebtoken')
 const config = require('../config/default.json')
-const key = config.Keys.readWrite
+const key = config.Keys.licenca
 const specialkey = config.Keys.specialKey
 
 exports.generateToken = async (dados) => {

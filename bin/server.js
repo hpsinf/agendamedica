@@ -1,13 +1,12 @@
-'use strict'
 
 const app = require('../app');
-const config = require('config');
-const port = process.env.PORT || config.get('Server.port');
+const config = require('../config/default.json');
+const port = process.env.PORT || config.Server.port;
 const path = require('path');
 const mongoose = require('../services/connect');
 
 app.listen(port, function () {
-    console.log(`${config.get('Server.name')} em ${port}`)
+    console.log(`${config.Server.name} em ${port}`)
 });
 
 //Error handling
