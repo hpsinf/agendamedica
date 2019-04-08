@@ -29,7 +29,8 @@
         }
     },
     "Keys": {        
-        "licenca": "njednhfmmsnhdnnm",
+        "usuario": "chave para geração e login de Usuario",
+        "licenca": "chave para geração de licença",
         "sendGrid": "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",
         "comtele": "bd08f6b0-eaa3-48eb-8e98-9fee38e4bd93",
         "specialKey": "não me diga"

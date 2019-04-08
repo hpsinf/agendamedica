@@ -5,7 +5,8 @@ const controller = require('../controllers/user')
 const auth = require('../../services/auth')
 
 userRoute.get('/', auth.authorize, controller.get)
-userRoute.get('/:nome/:senha/autenticacao', controller.getAutenticacao)
+userRoute.get('/autenticar', controller.getAutenticacao)
+userRoute.get('/:nome/:senha/autenticar', controller.getAutenticacao)
 userRoute.post('/:nome/:email/:senha/cadastrar', controller.post);
 
 module.exports = userRoute
