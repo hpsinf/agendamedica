@@ -48,7 +48,8 @@ app.use((req, res, next) => {
 
 //Instanciar models
 //Raiz rotas gerais
-const user = require('./src/models/user')
+const user = require('./src/models/user'),
+    cidade = require('./src/models/cidade')
 
 //Models Clientes
 const paciente_iris = require('./src/models/iris/paciente'),

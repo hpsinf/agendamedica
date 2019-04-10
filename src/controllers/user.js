@@ -3,7 +3,7 @@ const repo = require('../repositories/user')
 const md5 = require('md5')
 const config = require('../../config/default.json')
 const key = config.Keys.usuario
-const globaluse = require('../../globaluse/functions')
+//const globaluse = require('../../globaluse/functions')
 
 exports.getAll = async (req, res, next) => {
     try {

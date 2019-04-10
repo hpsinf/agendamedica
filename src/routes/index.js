@@ -12,5 +12,6 @@ router.get('/', (req, res) => {
 //Rotas gerenciais
 router.use('/users', require('./users'))
 router.use('/licencas', require('./licencas'))
+router.use('/cidades', require('./cidades'))
 
 module.exports = router
