@@ -8,6 +8,7 @@ const globaluse = require('../../globaluse/functions')
 exports.getLicenca = async (req, res, next) => {
     const dias = req.body.dias || req.params.dias || req.query.dias
     const cliente = req.body.cliente || req.params.cliente || req.query.cliente
+
     dados = {
         dias: dias + 'd',
         cliente: cliente,
