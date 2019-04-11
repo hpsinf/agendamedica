@@ -12,7 +12,7 @@ cidadeRoute.get('/:estado', controller.getByEstado)
 cidadeRoute.post('/', controller.post);
 cidadeRoute.post('/:nome/:estado/cadastrar', controller.post);
 
-cidadeRoute.delete('/:id', controller.delete);
+cidadeRoute.delete('/', controller.delete);
 cidadeRoute.delete('/:id', controller.delete);
 
 cidadeRoute.patch('/', controller.patch);
