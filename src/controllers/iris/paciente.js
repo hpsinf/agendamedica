@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 
 const repo = require('../../repositories/iris/paciente')
 const moment = require('moment')
@@ -6,18 +5,20 @@ const config = require('../../../config/default.json')
 
 
 let cachePacientes = {}
+let cachePacientesAll = {}
+let cacheByNome = {}
+let cacheNome = {}
 
 
 exports.getAll = async (req, res) => {
     try {
-        if (cachePacientes.length !== undefined) {
-            res.status(200).send(cachePacientes);
+        if (cachePacientesAll.length !== undefined) {
+            res.status(200).send(cachePacientesAll)
         } else {
-            var data = await repo.getAll()
-            cachePacientes = data
-            res.status(200).send(data)
+            cachePacientesAll = await repo.getAll()
+            res.status(200).send(cachePacientesAll)
             setTimeout(() => {
-                cachePacientes = {};
+                cachePacientesAll = {}
             }, 3000);
         }
     } catch (err) {
@@ -33,9 +34,8 @@ exports.get = async (req, res) => {
         if (cachePacientes.length !== undefined) {
             res.status(200).send(cachePacientes)
         } else {
-            var data = await repo.get()
-            cachePacientes = data
-            res.status(200).send(data)
+            cachePacientes = await repo.get()
+            res.status(200).send(cachePacientes)
             setTimeout(() => {
                 cachePacientes = {}
             }, 3000)
@@ -50,29 +50,35 @@ exports.get = async (req, res) => {
 
 exports.getByNome = async (req, res) => {
     let nome = req.body.nome || req.params.nome || req.query.nome
-    if (nome) {
+    if (nome !== cacheNome) {
         try {
-            var data = await repo.getByNome(nome)
-            if (data.length !== 0)
-                res.status(200).send(data)
+            cacheByNome = await repo.getByNome(nome)
+            cacheNome = nome;
+            if (cacheByNome.length !== 0)
+                res.status(200).send(cacheByNome)
             else
                 res.status(200).send([{ mensagem: config.Msg.nomeNaoEncontrado }])
+
+            setTimeout(() => {
+                cacheByNome = {}
+                cacheNome = {}
+            }, 30000)
         } catch (err) {
             res.status(500).send([{
                 mensagem: config.Msg.statusCode500, erro: err
             }]);
         }
     } else {
-        res.status(204).send([{ mensagem: config.Msg.nomeNaoEncontrado }])
+        res.status(200).send(cacheByNome)
     }
 }
 
 exports.post = async (req, res) => {
-    let nome = req.body.nome || req.params.nome || req.query.nome;
-    let genero = req.body.genero || req.params.genero || req.query.genero;
-    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento || req.query.data_nascimento, 'DD-MM-YYYY').format();
-    let especial = req.body.especial || req.params.especial || req.query.especial;
-    let observacao = req.body.observacao || req.params.observacao || req.query.observacao;
+    let nome = req.body.nome || req.params.nome || req.query.nome
+    let genero = req.body.genero || req.params.genero || req.query.genero
+    let data_nascimento = moment(req.body.data_nascimento || req.params.data_nascimento || req.query.data_nascimento, 'DD-MM-YYYY').format()
+    let especial = req.body.especial || req.params.especial || req.query.especial
+    let observacao = req.body.observacao || req.params.observacao || req.query.observacao
 
     let dados = {
         nome: nome,
@@ -112,7 +118,7 @@ exports.patch = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-    let id = req.body.id || req.params.id || req.query.id;
+    let id = req.body.id || req.params.id || req.query.id
     if (id) {
         try {
             /*

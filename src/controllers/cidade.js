@@ -75,7 +75,7 @@ exports.patch = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-    let id = req.body.id || req.params.id || req.query.id;
+    let id = req.body.id || req.params.id || req.query.id
     if (id) {
         try {
             /*

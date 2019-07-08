@@ -35,6 +35,6 @@ exports.delete = async (id) => {
 }
 
 exports.create = (data) => {
-    let paciente = new Paciente(data);
-    return paciente.save();
+    let paciente = new Paciente(data)
+    return paciente.save()
 }

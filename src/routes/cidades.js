@@ -2,6 +2,7 @@
 //Criação: Henrique 10/04/2019
 
 const express = require('express')
+//import exports from 'express';
 const cidadeRoute = express.Router()
 const controller = require('../controllers/cidade')
 
@@ -9,13 +10,13 @@ const controller = require('../controllers/cidade')
 cidadeRoute.get('/', controller.get)
 cidadeRoute.get('/:estado', controller.getByEstado)
 
-cidadeRoute.post('/', controller.post);
-cidadeRoute.post('/:nome/:estado/cadastrar', controller.post);
+cidadeRoute.post('/', controller.post)
+cidadeRoute.post('/:nome/:estado/cadastrar', controller.post)
 
-cidadeRoute.delete('/', controller.delete);
-cidadeRoute.delete('/:id', controller.delete);
+cidadeRoute.delete('/', controller.delete)
+cidadeRoute.delete('/:id', controller.delete)
 
-cidadeRoute.patch('/', controller.patch);
-cidadeRoute.patch('/:id', controller.patch);
+cidadeRoute.patch('/', controller.patch)
+cidadeRoute.patch('/:id', controller.patch)
 
 module.exports = cidadeRoute
