@@ -19,7 +19,7 @@ exports.getAll = async (req, res) => {
             res.status(200).send(cachePacientesAll)
             setTimeout(() => {
                 cachePacientesAll = {}
-            }, 3000);
+            }, 30000);
         }
     } catch (err) {
         res.status(500).send([{
@@ -38,7 +38,7 @@ exports.get = async (req, res) => {
             res.status(200).send(cachePacientes)
             setTimeout(() => {
                 cachePacientes = {}
-            }, 3000)
+            }, 30000)
         }
     } catch (err) {
         res.status(500).send([{
