@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
 
     //Website que serão permitidos conectar a api
-    res.setHeader('Access-Control-Allow-Origin', '*','localhost:4200')
+    res.setHeader('Access-Control-Allow-Origin', "*")
 
     // Request metodos aceitos
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 })
 
 app.use((req, res, next) => {
-    res.removeHeader('Access-Control-Allow-Origin')
+  //  res.removeHeader('Access-Control-Allow-Origin')
     res.removeHeader('Access-Control-Allow-Methods')
     res.removeHeader('Access-Control-Allow-Headers')
     res.removeHeader('Access-Control-Allow-Credentials')
