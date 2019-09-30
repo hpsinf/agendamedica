@@ -5,6 +5,7 @@ const config = require('../config/default.json')
 
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
+mongoose.set('useUnifiedTopology', true)
 
 let initConnectString = config.Connect.MongoDB.mongoDbAtlas.initConnectString
 let user = config.Connect.MongoDB.mongoDbAtlas.user
